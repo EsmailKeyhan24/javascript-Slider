@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;padding: 0;
+            box-sizing: border-box;
+        }
+        .box{
+            width: 600px;
+            height: 600px;
+            border:4px solid black;
+            margin:100px auto;
+            position: relative;
+            >.row{
+                width: 100%;
+                background-color:purple;
+                transition:.6s;
+            }
+        }
+
+        .row>section{
+            width: 100%;
+            height: 600px;
+            border:5px solid gold;
+        }
+
+        .Navigation{
+            width: 100%;
+            padding-block:20px;
+            background-color:red;
+            position: absolute;
+            bottom: 0;left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            >.SlideBtn{
+                width:20px;
+                height:20px;
+                border:2px solid white;
+                border-radius: 50%;
+                list-style:none;
+                margin-inline:4px;
+                cursor: pointer;
+            }
+            >.SlideBtn.active{
+                background-color:black;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="row">
+            <section></section>
+            <section></section>
+            <section></section>
+            <section></section>
+            <section></section>
+            <section></section>
+        </div>
+        <ul class="Navigation"></ul>
+    </div>
+</body>
+    <script>
+        let section=document.querySelectorAll('.row>section')
+        const row=document.querySelector('.row')
+        row.style.height=section.length*600+'px'
+
+        for(i=0; i<section.length; i++){
+            let li=document.createElement('li')
+            li.classList.add('SlideBtn')
+            document.querySelector('.Navigation').appendChild(li)
+        }
+
+        const li=document.querySelectorAll('.SlideBtn')
+        li.forEach((item , index)=>{
+            li[0].classList.add('active')
+            item.addEventListener('click' , ()=>{
+                for(i=0; i<li.length; i++){
+                    li[i].classList.remove('active')
+                }
+                item.classList.add('active')
+                row.style.transform='translateY(-'+(index*600)+'px)'
+            })
+        })
+
+        
+
+
+    </script>
+</html>
